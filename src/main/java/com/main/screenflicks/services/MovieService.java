@@ -64,8 +64,11 @@ public class MovieService {
     }
     
     public void updateMovie(Movie movie) {
-        // Update the movie in the database using the MongoTemplate
         mongoTemplate.save(movie);
+    }
+    
+    public void deleteMovieById(String id) {
+        repository.deleteById(id);
     }
 }
 

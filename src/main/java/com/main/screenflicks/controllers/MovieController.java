@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -78,7 +79,6 @@ public class MovieController {
             return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
         }
 
-        // Update the existing movie with the provided information
         existingMovie.setTitle(updatedMovie.getTitle());
         existingMovie.setCategory(updatedMovie.getCategory());
         existingMovie.setYear(updatedMovie.getYear());
@@ -90,11 +90,24 @@ public class MovieController {
         existingMovie.setPrice(updatedMovie.getPrice());
         existingMovie.setFeatured(updatedMovie.getFeatured());
 
-        // Save the updated movie
         service.updateMovie(existingMovie);
 
-        // Return a response with the updated movie
         CustomizedResponse<Movie> response = new CustomizedResponse<>("Movie updated successfully", existingMovie);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+	
+	@DeleteMapping("/movies/{id}")
+    public ResponseEntity<CustomizedResponse<Void>> deleteMovieById(@RequestParam(value="id") String id) {
+		
+		Movie movie = service.getMovieByID(id);
+        if (movie == null) {
+            CustomizedResponse<Void> errorResponse = new CustomizedResponse<>("Movie not found for id: " + id, null);
+            return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+        }
+        
+        service.deleteMovieById(id);
+        
+        CustomizedResponse<Void> response = new CustomizedResponse<>("Movie deleted successfully", null);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
