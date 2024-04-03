@@ -27,14 +27,16 @@ public class MovieService {
     public List<Movie> getMovies() {
     	Query query = new Query();
     	query.addCriteria(Criteria.where("category").is("movie"));
-        return repository.findAll();
+    	List<Movie> movies = mongoTemplate.find(query,Movie.class);
+        return movies;
     }
     
     // Method to retrieve all tvshows
     public List<Movie> getTVShows() {
     	Query query = new Query();
     	query.addCriteria(Criteria.where("category").is("tvshow"));
-        return repository.findAll();
+    	List<Movie> tvshows = mongoTemplate.find(query,Movie.class);
+        return tvshows;
     }
 
     // Method to add a new movie

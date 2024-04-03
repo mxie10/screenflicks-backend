@@ -54,7 +54,7 @@ public class UserController
     		CustomizedResponse<User> errorResponse = new CustomizedResponse<>("user not found", null);
             return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     	}
-    	var response = new CustomizedResponse<User>( "success", null);
+    	var response = new CustomizedResponse<User>( "success", returnedUser);
     	return new ResponseEntity<>(response, HttpStatus.OK);
     }
     

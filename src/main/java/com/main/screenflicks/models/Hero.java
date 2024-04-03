@@ -8,17 +8,27 @@ public class Hero {
 	@Id
 	private String id;
 	private String title;
+	private String imageSrc;
 	private String actors[];
 	
 	public Hero() {}
 
-	public Hero(String id, String title, String[] actors) {
+	public Hero(String id, String title, String imageSrc, String[] actors) {
 		super();
 		this.id = id;
 		this.title = title;
+		this.imageSrc = imageSrc;
 		this.actors = actors;
 	}
 
+
+	public String getImageSrc() {
+		return imageSrc;
+	}
+
+	public void setImageSrc(String imageSrc) {
+		this.imageSrc = imageSrc;
+	}
 
 	public String getId() {
 		return id;
