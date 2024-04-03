@@ -25,6 +25,15 @@ public class MovieService {
 
     // Method to retrieve all movies
     public List<Movie> getMovies() {
+    	Query query = new Query();
+    	query.addCriteria(Criteria.where("category").is("movie"));
+        return repository.findAll();
+    }
+    
+    // Method to retrieve all tvshows
+    public List<Movie> getTVShows() {
+    	Query query = new Query();
+    	query.addCriteria(Criteria.where("category").is("tvshow"));
         return repository.findAll();
     }
 

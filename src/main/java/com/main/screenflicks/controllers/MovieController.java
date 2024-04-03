@@ -27,7 +27,14 @@ public class MovieController {
 	@GetMapping("/movies")
 	public ResponseEntity<CustomizedResponse<List<Movie>>> getMovies()
 	{
-		var customizedResponse = new CustomizedResponse<List<Movie>>("list of movies and shows", service.getMovies());
+		var customizedResponse = new CustomizedResponse<List<Movie>>("list of movies", service.getMovies());
+		return new ResponseEntity<CustomizedResponse<List<Movie>>>(customizedResponse,HttpStatus.OK);
+	}
+	
+	@GetMapping("/tvshows")
+	public ResponseEntity<CustomizedResponse<List<Movie>>> getTVShows()
+	{
+		var customizedResponse = new CustomizedResponse<List<Movie>>("list of TV shows", service.getTVShows());
 		return new ResponseEntity<CustomizedResponse<List<Movie>>>(customizedResponse,HttpStatus.OK);
 	}
 	

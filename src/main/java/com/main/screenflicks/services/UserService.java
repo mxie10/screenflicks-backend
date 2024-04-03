@@ -44,8 +44,12 @@ public class UserService
     public User getUser(User user)
     {
     	Query query = new Query();
-    	query.addCriteria(Criteria.where("email").is(user.getEmail()).and("password").is(passwordEncoder.encode(user.getPassword())));
-    	User user1= mongoTemplate.findOne(query,User.class);
-    	return user1; 
+    	query.addCriteria(Criteria.where("email").is(user.getEmail()));
+    	User userFromDb= mongoTemplate.findOne(query,User.class);
+    	
+    	if (userFromDb != null && passwordEncoder.matches(user.getPassword(), userFromDb.getPassword())) {
+            return userFromDb;
+        }
+    	return null;
     }
 }

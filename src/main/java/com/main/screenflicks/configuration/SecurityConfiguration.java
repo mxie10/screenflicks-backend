@@ -12,19 +12,31 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfiguration {
 
-    @SuppressWarnings({ "removal", "deprecation" })
+//    @SuppressWarnings({ "removal", "deprecation" })
+//	@Bean
+//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//        http
+//            .csrf().disable()
+//            .authorizeRequests()
+//                .requestMatchers("/users").permitAll()
+//                .anyRequest()
+//                .authenticated()
+//                .and()
+//            .formLogin();
+//        return http.build();
+//    }
+	
+  @SuppressWarnings({ "removal", "deprecation" })
 	@Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-            .csrf().disable()
-            .authorizeRequests()
-                .requestMatchers("/users").permitAll()
-                .anyRequest()
-                .authenticated()
-                .and()
-            .formLogin();
-        return http.build();
-    }
+  public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+      http
+          .csrf().disable()
+          .authorizeRequests()
+              .requestMatchers("/users").permitAll()
+              .anyRequest()
+              .permitAll();
+      return http.build();
+  }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
