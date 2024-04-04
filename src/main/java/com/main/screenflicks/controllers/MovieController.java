@@ -44,6 +44,13 @@ public class MovieController {
 		service.addMovie(movie);
 	}
 	
+	@GetMapping("/search")
+	public ResponseEntity<CustomizedResponse<List<Movie>>> searchMovie(@RequestParam(value="params") String params)
+	{
+		var customizedResponse = new CustomizedResponse<List<Movie>>("search result for movies", service.searchMovie(params));
+		return new ResponseEntity<CustomizedResponse<List<Movie>>>(customizedResponse,HttpStatus.OK);
+	}
+	
 	@GetMapping("/movies/title")
 	public ResponseEntity<CustomizedResponse<List<Movie>>> getMoviesByTitle(@RequestParam(value="title") String title)
 	{

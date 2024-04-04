@@ -9,6 +9,7 @@ import com.main.screenflicks.models.Movie;
 import com.main.screenflicks.models.MovieRepository;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -52,6 +53,15 @@ public class MovieService {
     	return movies; 
     }
     
+    //search movie
+    public List<Movie> searchMovie(String params) {
+    	if(params.trim() == "") return Collections.emptyList();
+        Query query = new Query();
+        query.addCriteria(Criteria.where("title").regex(".*" + params + ".*", "i"));
+        List<Movie> movies = mongoTemplate.find(query, Movie.class);
+        return movies;
+    }
+    
     // Method to get featured movies
     public List<Movie> getFeaturedMovies() {
     	Query query = new Query();
@@ -80,6 +90,6 @@ public class MovieService {
     
     public void deleteMovieById(String id) {
         repository.deleteById(id);
-    }
+    } 
 }
 
