@@ -72,7 +72,7 @@ public class MovieController {
 		return new ResponseEntity<CustomizedResponse<List<Movie>>>(customizedResponse,HttpStatus.OK);
 	}
 	
-	@GetMapping("/movies/id")
+	@GetMapping("/movies/{id}")
 	public ResponseEntity<CustomizedResponse<Movie>> getMovieById(@RequestParam(value="id") String id)
 	{
 		Movie movie = service.getMovieByID(id);
@@ -85,7 +85,7 @@ public class MovieController {
 		return new ResponseEntity<CustomizedResponse<Movie>>(HttpStatus.OK);
 	}
 	
-	@PutMapping("/movies/{id}")
+	@PutMapping("/movies/update")
     public ResponseEntity<CustomizedResponse<Movie>> updateMovie(@RequestParam(value="id") String id, @RequestBody Movie updatedMovie) {
         Movie existingMovie = service.getMovieByID(id);
         if (existingMovie == null) {
@@ -110,7 +110,7 @@ public class MovieController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 	
-	@DeleteMapping("/movies/{id}")
+	@DeleteMapping("/movies")
     public ResponseEntity<CustomizedResponse<Void>> deleteMovieById(@RequestParam(value="id") String id) {
 		
 		Movie movie = service.getMovieByID(id);

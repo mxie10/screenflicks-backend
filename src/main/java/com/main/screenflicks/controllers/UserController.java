@@ -64,9 +64,9 @@ public class UserController
     public ResponseEntity<CustomizedResponse<List<User>>> createUsers(@RequestBody User user)
     {
 
-     var response = new CustomizedResponse<List<User>>( "success", Collections.singletonList(userService.addUser(user)));
-
-     return new ResponseEntity<CustomizedResponse<List<User>>>( response, HttpStatus.OK);
+	     var response = new CustomizedResponse<List<User>>( "success", Collections.singletonList(userService.addUser(user)));
+	
+	     return new ResponseEntity<CustomizedResponse<List<User>>>( response, HttpStatus.OK);
 
     }
 }
